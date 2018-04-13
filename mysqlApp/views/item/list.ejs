@@ -1,0 +1,31 @@
+<%- include ../layouts/header.ejs %>
+
+<table width='80%' border=0>
+
+	<tr style='text-align:left; background-color:#CCC'>
+		<th>Name</th>
+		<th>Code</th>
+		<th>Price</th>
+	</tr>
+	<% if (data) { %>
+	<% data.forEach(function(item){ %>
+		<tr>
+			<td><%= item.Name %></td>
+			<td><%= item.Code %></td>
+			<td>$ <%= item.Price %></td>
+			<td>
+				<div style="float:left">
+					<a href='/items/edit/<%= item.Id %>'>Edit</a> &nbsp;							
+					<form method="post" action="/items/delete/<%= item.Id %>" style="float:right">
+						<input type="submit" name="delete" value='Delete' onClick="return confirm('Are you sure you want to delete?')" />
+						<input type="hidden" name="_method" value="DELETE" />
+					</form>
+				</div>
+			</td>
+		</tr>
+	<% }) %>
+	<% } %>
+
+</table>
+
+<%- include ../layouts/footer.ejs %>

@@ -1,0 +1,25 @@
+<%- include ../layouts/header.ejs %>	
+
+<form action="/items/edit/<%= Id %>" method="post" name="form1">
+	<table width="25%" border="0">
+		<tr> 
+			<td>Name</td>
+			<td><input type="text" name="Name" id="Name" value="<%= Name %>" /></td>
+		</tr>
+		<tr> 
+			<td>Code</td>
+			<td><input type="text" name="Code" value="<%= Code %>" /></td>
+		</tr>
+		<tr> 
+			<td>Price</td>
+			<td><input type="text" name="Price" value="<%= Price %>" /></td>
+		</tr>
+		<tr> 
+			<td></td>
+			<td><input type="submit" name="Submit" value="Edit" /></td>
+		</tr>
+	</table>
+	<input type="hidden" name="_method" value="PUT" />
+</form>
+
+<%- include ../layouts/footer.ejs %>
