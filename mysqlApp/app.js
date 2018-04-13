@@ -5,10 +5,11 @@ var myconnection = require('express-myconnection')
 var expressvalidator = require('express-validator')
 var bodyparser = require('body-parser')
 require('ejs')
+var config = require('./config')
 var dbInfo = {
   host: 'donuts541.cujubf1hnrg2.us-east-2.rds.amazonaws.com',
   user: 'Donuts541App',
-  password: 'Donuts#541',
+  password: config.password,
   database: 'Donuts541DB'
 }
 
