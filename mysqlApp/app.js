@@ -26,9 +26,10 @@ app.use(myconnection(mysql, dbInfo, 'pool'))
 app.set('port', (process.env.PORT || 8080))
 
 var index = require('./routes/index')
-var items = require('./routes/items')
 var employees = require('./routes/employees')
+var items = require('./routes/items')
 var customers = require('./routes/customers')
+var suppliers = require('./routes/suppliers')
 // View Engine
 app.set('view engine', 'ejs')
 app.use(expressvalidator())
@@ -48,10 +49,10 @@ app.use(methodOverride(function (req, res) {
 
 
 app.use('/', index)
-app.use('/items', items)
 app.use('/employees', employees)
+app.use('/items', items)
 app.use('/customers', customers)
-
+app.use('/suppliers', suppliers)
 
 app.listen(process.env.PORT || 3000, function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);

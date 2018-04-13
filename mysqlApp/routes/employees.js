@@ -2,7 +2,7 @@ var express = require('express')
 var app = express()
 app.get('/', function(req, res, next) {
 	req.getConnection(function(error, conn) {
-		conn.query('SELECT * FROM Donuts541DB.Employee ORDER BY Id DESC',function(err, rows, fields) {
+		conn.query('SELECT * FROM Donuts541DB.Employee ORDER BY id DESC',function(err, rows, fields) {
 			if (err) {
 				res.render('employee/list', {
 					title: 'Employee List', 
@@ -71,16 +71,16 @@ app.post('/add', function(req, res, next){
     }
 })
 
-app.get('/edit/(:Id)', function(req, res, next){
+app.get('/edit/(:id)', function(req, res, next){
 	req.getConnection(function(error, conn){
-		conn.query('SELECT * FROM Donuts541DB.Employee WHERE Id = ' + req.params.Id, function(err, rows, fields){
+		conn.query('SELECT * FROM Donuts541DB.Employee WHERE id = ' + req.params.id, function(err, rows, fields){
 			if(rows.length <= 0){ // sadness
 				res.redirect('/employees')
 			}
 			else{
 				res.render('employee/edit', {
 					title: 'Edit Employee',
-					Id: rows[0].Id,
+					id: rows[0].id,
 					Name: rows[0].Name,
 					Code: rows[0].Code,
 					Address: rows[0].Address
@@ -90,10 +90,10 @@ app.get('/edit/(:Id)', function(req, res, next){
 	})
 })
 
-app.put('/edit/(:Id)', function(req, res, next) {
+app.put('/edit/(:id)', function(req, res, next) {
 	req.assert('Name', 'Name is required').notEmpty()
 	req.assert('Code', 'Code is required').notEmpty()
-    req.assert('Address', 'A valid price is required').notEmpty()
+    req.assert('Address', 'A valid address is required').notEmpty()
 
     var errors = req.validationErrors()
     
@@ -105,11 +105,11 @@ app.put('/edit/(:Id)', function(req, res, next) {
 		}
 		
 		req.getConnection(function(error, conn) {
-			conn.query('UPDATE Donuts541DB.Employee SET ? WHERE Id = ' + req.params.Id, employee, function(err, result) {
+			conn.query('UPDATE Donuts541DB.Employee SET ? WHERE id = ' + req.params.id, employee, function(err, result) {
 				if (err) {
 					res.render('employee/edit', {
 						title: 'Edit Employee',
-						Id: req.params.Id,
+						id: req.params.id,
 						Name: req.body.Name,
 						Code: req.body.Code,
 						Address: req.body.Address
@@ -117,7 +117,7 @@ app.put('/edit/(:Id)', function(req, res, next) {
 				} else {
 					res.render('employee/edit', {
 						title: 'Edit Employee',
-						Id: req.params.Id,
+						id: req.params.id,
 						Name: req.body.Name,
 						Code: req.body.Code,
 						Address: req.body.Address
@@ -129,7 +129,7 @@ app.put('/edit/(:Id)', function(req, res, next) {
 	else {
         res.render('employee/edit', { 
             title: 'Edit Employee',            
-			Id: req.params.Id, 
+			id: req.params.id, 
 			Name: req.body.Name,
 			Code: req.body.Code,
 			Address: req.body.Address
@@ -137,10 +137,10 @@ app.put('/edit/(:Id)', function(req, res, next) {
     }
 })
 
-app.delete('/delete/(:Id)', function(req, res, next) {
-	var employee = { Id: req.params.Id }
+app.delete('/delete/(:id)', function(req, res, next) {
+	var employee = { id: req.params.id }
 	req.getConnection(function(error, conn) {
-		conn.query('DELETE FROM Donuts541DB.Employee WHERE Id = ' + req.params.Id, employee, function(err, result) {
+		conn.query('DELETE FROM Donuts541DB.Employee WHERE id = ' + req.params.id, employee, function(err, result) {
 			if (err) {
 				res.redirect('/employees')
 			} else {
