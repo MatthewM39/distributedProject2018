@@ -15,8 +15,8 @@
 			<td>$ <%= item.Price %></td>
 			<td>
 				<div style="float:left">
-					<a href='/items/edit/<%= item.Id %>'>Edit</a> &nbsp;							
-					<form method="post" action="/items/delete/<%= item.Id %>" style="float:right">
+					<a href='/items/edit/<%= item.id %>'>Edit</a> &nbsp;							
+					<form method="post" action="/items/delete/<%= item.id %>" style="float:right">
 						<input type="submit" name="delete" value='Delete' onClick="return confirm('Are you sure you want to delete?')" />
 						<input type="hidden" name="_method" value="DELETE" />
 					</form>

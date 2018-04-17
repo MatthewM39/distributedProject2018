@@ -17,7 +17,7 @@ app.get('/', function(req, res, next) {
 		})
 	})
 })
-
+//
 app.get('/add', function(req, res, next){
 	res.render('customer/add', {
 		title: "Add New Customer",
